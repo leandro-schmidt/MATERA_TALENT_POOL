@@ -156,7 +156,7 @@ public class Employee {
 		result = prime * result + ((dateOfBirth == null) ? 0 : dateOfBirth.hashCode());
 		result = prime * result + ((dateOfEmployment == null) ? 0 : dateOfEmployment.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((middleName == null) ? 0 : middleName.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
@@ -170,45 +170,34 @@ public class Employee {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (!(obj instanceof Employee)) {
 			return false;
+		}
 		Employee other = (Employee) obj;
-		if (dateOfBirth == null) {
-			if (other.dateOfBirth != null)
-				return false;
-		} else if (!dateOfBirth.equals(other.dateOfBirth))
+		if (dateOfBirth == null && other.dateOfBirth != null) {
+
 			return false;
-		if (dateOfEmployment == null) {
-			if (other.dateOfEmployment != null)
-				return false;
-		} else if (!dateOfEmployment.equals(other.dateOfEmployment))
-			return false;
+		}
 		if (firstName == null) {
-			if (other.firstName != null)
+			if (other.firstName != null) {
 				return false;
-		} else if (!firstName.equals(other.firstName))
+			}
+		} else if (!firstName.equals(other.firstName)) {
 			return false;
-		if (id != other.id)
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
+		}
+		if (id == null) {
+			if (other.id != null) {
 				return false;
-		} else if (!lastName.equals(other.lastName))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
-		if (middleName == null) {
-			if (other.middleName != null)
-				return false;
-		} else if (!middleName.equals(other.middleName))
-			return false;
-		if (status == null) {
-			if (other.status != null)
-				return false;
-		} else if (!status.equals(other.status))
-			return false;
+		}
 		return true;
 	}
 

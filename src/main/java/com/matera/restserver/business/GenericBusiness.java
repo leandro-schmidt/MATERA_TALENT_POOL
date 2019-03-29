@@ -10,6 +10,8 @@ public interface GenericBusiness<T extends GenericDTO> {
 
 	public Long create(T dto) throws EntityExistsException;
 
+	public void create(List<T> dto);
+	
 	public T find(Long id) throws EntityNotFoundException;
 
 	public List<T> findAll() throws EntityNotFoundException;

@@ -24,12 +24,24 @@ public class EmployeeBusiness implements GenericBusiness<EmployeeDTO> {
 	@Autowired
 	private EmployeeRepository rep;
 
+	/**
+	 * The JPA Employee entity
+	 */
 	Employee entity;
 
+	/**
+	 * The Employee DTO 
+	 */
 	EmployeeDTO dto;
 
+	/**
+	 * List of JPA Employee entity
+	 */
 	List<Employee> entities;
-
+	
+	/**
+	 * Creates an Employee
+	 */
 	public Long create(EmployeeDTO dto) throws EntityExistsException {
 		/**
 		 * If you are trying to be sneaky (or you made a mistake, who knows?) and try to
@@ -46,7 +58,10 @@ public class EmployeeBusiness implements GenericBusiness<EmployeeDTO> {
 			throw new EntityExistsException();
 		}
 	}
-
+	
+	/**
+	 * Finds an Employee with given id
+	 */
 	public EmployeeDTO find(Long id) throws EntityNotFoundException {
 		dto = new EmployeeDTO();
 		entities = rep.findByIdAndStatus(id, ACTIVE);
@@ -60,6 +75,9 @@ public class EmployeeBusiness implements GenericBusiness<EmployeeDTO> {
 		return dto;
 	}
 
+	/**
+	 * Finds all Employees
+	 */
 	public List<EmployeeDTO> findAll() throws EntityNotFoundException {
 		List<EmployeeDTO> dtos;
 		entities = rep.findByStatus(ACTIVE);
@@ -82,9 +100,13 @@ public class EmployeeBusiness implements GenericBusiness<EmployeeDTO> {
 		return dtos;
 	}
 
+	/**
+	 * Deletes an Employee
+	 */
 	public EmployeeDTO delete(Long id) throws EntityNotFoundException {
 		entities = rep.findByIdAndStatus(id, ACTIVE);
-
+		dto = new EmployeeDTO();
+		
 		if (entities.isEmpty()) {
 			throw new EntityNotFoundException();
 		}
@@ -97,6 +119,9 @@ public class EmployeeBusiness implements GenericBusiness<EmployeeDTO> {
 
 	}
 
+	/**
+	 * Updates an Employee
+	 */
 	public void update(EmployeeDTO dto) throws EntityNotFoundException {
 		entities = rep.findByIdAndStatus(dto.getId(), ACTIVE);
 
@@ -107,6 +132,21 @@ public class EmployeeBusiness implements GenericBusiness<EmployeeDTO> {
 		entity = entities.get(0);
 		BeanUtils.copyProperties(dto, entity, "id");
 		rep.save(entity);
+	}
+
+	
+	/**
+	 * Creates a bunch of Employees
+	 */
+	public void create(List<EmployeeDTO> dto) {
+		
+		entities = dto.stream().map(e -> {
+			Employee d = new Employee();
+			BeanUtils.copyProperties(e, d);
+			return d;
+		}).collect(Collectors.toList());
+		
+		rep.saveAll(entities);
 	}
 
 }

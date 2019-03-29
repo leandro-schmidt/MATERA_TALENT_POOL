@@ -9,6 +9,8 @@ import com.matera.restserver.exception.EntityNotFoundException;
 public interface EmployeeService {
 
 	public Long create(EmployeeDTO dto) throws EntityExistsException;
+	
+	public void create(List<EmployeeDTO> dto);
 
 	public EmployeeDTO find(Long id) throws EntityNotFoundException;
 

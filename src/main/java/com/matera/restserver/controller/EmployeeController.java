@@ -65,7 +65,7 @@ public class EmployeeController {
 	}
 
 	/**
-	 * Finds all active employees.
+	 * Searchs all active employees.
 	 * 
 	 * @return All employees on the database.
 	 */
@@ -84,7 +84,7 @@ public class EmployeeController {
 	 * @param id id of the employee.
 	 * @return employee with given id, if it exists.
 	 */
-	@GetMapping(value = "/{id}" , produces = "application/json")
+	@GetMapping(value = "/{id}", produces = "application/json")
 	public EmployeeDTO findEmployee(@PathVariable Long id) {
 		try {
 			return service.find(id);
@@ -99,7 +99,7 @@ public class EmployeeController {
 	 * @param id
 	 * @return the employee deactivated
 	 */
-	@DeleteMapping(value = "/{id}" , produces = "application/json")
+	@DeleteMapping(value = "/{id}", produces = "application/json")
 	public EmployeeDTO deleteEmployee(@PathVariable Long id) {
 		try {
 			return service.delete(id);
@@ -116,7 +116,7 @@ public class EmployeeController {
 	 * @param id
 	 * @return the employee updated
 	 */
-	@PutMapping(value = "/{id}" , produces = "application/json", consumes = "application/json")
+	@PutMapping(value = "/{id}", produces = "application/json", consumes = "application/json")
 	public EmployeeDTO updateEmployee(@PathVariable Long id, @RequestBody String reqBody) {
 		try {
 			employee = mapper.readValue(reqBody, EmployeeDTO.class);

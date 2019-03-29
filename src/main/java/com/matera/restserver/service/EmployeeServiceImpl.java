@@ -54,4 +54,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 		business.update(dto);
 	}
 
+	@Transactional
+	public void create(List<EmployeeDTO> dto) {
+		business.create(dto);
+	}
+
 }
