@@ -13,6 +13,7 @@ import com.matera.restserver.exception.EntityExistsException;
 import com.matera.restserver.exception.EntityNotFoundException;
 import com.matera.restserver.model.Employee;
 import com.matera.restserver.repository.EmployeeRepository;
+import com.matera.restserver.util.Messages;
 
 @Component
 public class EmployeeBusiness implements GenericBusiness<EmployeeDTO> {
@@ -94,7 +95,7 @@ public class EmployeeBusiness implements GenericBusiness<EmployeeDTO> {
 		}).collect(Collectors.toList());
 
 		if (dtos.isEmpty()) {
-			throw new EntityNotFoundException("There are no active employees :(");
+			throw new EntityNotFoundException(Messages.getMessage("business.employee.employeesnotfound"));
 		}
 
 		return dtos;

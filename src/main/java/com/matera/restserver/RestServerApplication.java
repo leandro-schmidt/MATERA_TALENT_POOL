@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Bean;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.matera.restserver.service.EmployeeService;
+import com.matera.restserver.util.Messages;
 import com.matera.restserver.dto.EmployeeDTO;
 
 @SpringBootApplication
@@ -34,9 +35,9 @@ public class RestServerApplication {
 			try {
 				List<EmployeeDTO> employees = mapper.readValue(inputStream,typeReference);
 				service.create(employees);
-				LOGGER.info("Users in file users.json succesfully created on the database!");
+				LOGGER.info(Messages.getMessage("employeescharge.success"));
 			} catch (IOException e){
-				LOGGER.severe("Error loading the users.json file: " + e.getMessage());
+				LOGGER.severe(Messages.getMessage("employeescharge.fail") + e.getMessage());
 			}
 		};
 	}

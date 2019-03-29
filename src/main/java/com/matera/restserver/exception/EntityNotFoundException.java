@@ -1,5 +1,7 @@
 package com.matera.restserver.exception;
 
+import com.matera.restserver.util.Messages;
+
 public class EntityNotFoundException extends Exception {
 
 	/**
@@ -12,7 +14,7 @@ public class EntityNotFoundException extends Exception {
 	}
 
 	public EntityNotFoundException() {
-		super("The employee with given id was not found or is not active.");
+		super(Messages.getMessage("exceptions.default.entitynotfoundexception"));
 	}
 
 }
