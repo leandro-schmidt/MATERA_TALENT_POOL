@@ -15,7 +15,7 @@ Since this application uses Spring Boot and Maven, you just need to build it wit
 ```
 mvn clean install
 ```
-A jar will be generated in the /target directory.
+A jar will be generated in the target directory.
 
 The jar can be executed with the following command:
 ```
