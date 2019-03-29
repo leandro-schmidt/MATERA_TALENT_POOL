@@ -11,4 +11,6 @@ When the application is started, it will use the json file located [here](https:
 If you want to add more employees, or remove some, change this file and then build the application again.
 
 ### Other info
+In the [resources](https://github.com/leandro-schmidt/MATERA_TALENT_POOL/blob/master/src/main/resources) directory there are two json files that are examples of the ones used in the post requests.
+
 This app runs on port 8080 as default.
