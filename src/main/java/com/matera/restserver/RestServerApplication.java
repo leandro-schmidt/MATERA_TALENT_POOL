@@ -30,7 +30,7 @@ public class RestServerApplication {
 		return args -> {
 			ObjectMapper mapper = new ObjectMapper();
 			TypeReference<List<EmployeeDTO>> typeReference = new TypeReference<List<EmployeeDTO>>(){};
-			InputStream inputStream = TypeReference.class.getResourceAsStream("/employee.json");
+			InputStream inputStream = TypeReference.class.getResourceAsStream("/employees.json");
 			try {
 				List<EmployeeDTO> employees = mapper.readValue(inputStream,typeReference);
 				service.create(employees);
