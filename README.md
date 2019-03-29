@@ -10,6 +10,18 @@ Here are a few things you need to know about this application.
 When the application is started, it will use the json file located [here](https://github.com/leandro-schmidt/MATERA_TALENT_POOL/blob/master/src/main/resources/employees.json) as a initial load of employees to the memory database. 
 If you want to add more employees, or remove some, change this file and then build the application again.
 
+### Building
+Since this application uses Spring Boot and Maven, you just need to build it with this command from the root directory:
+```
+mvn clean install
+```
+A jar will be generated in the /target directory.
+
+The jar can be executed with the following command:
+```
+java -jar MATERA_TALENT_POOL-0.0.1-SNAPSHOT.jar
+```
+
 ## Other important info
 Here are some useful info.
 
