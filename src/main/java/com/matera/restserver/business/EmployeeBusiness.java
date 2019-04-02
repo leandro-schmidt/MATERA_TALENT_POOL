@@ -28,17 +28,17 @@ public class EmployeeBusiness implements GenericBusiness<EmployeeDTO> {
 	/**
 	 * The JPA Employee entity
 	 */
-	Employee entity;
+	private Employee entity;
 
 	/**
 	 * The Employee DTO 
 	 */
-	EmployeeDTO dto;
+	private EmployeeDTO dto;
 
 	/**
 	 * List of JPA Employee entity
 	 */
-	List<Employee> entities;
+	private List<Employee> entities;
 	
 	/**
 	 * Creates an Employee

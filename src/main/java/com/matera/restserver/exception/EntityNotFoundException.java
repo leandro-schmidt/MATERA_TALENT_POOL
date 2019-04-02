@@ -4,6 +4,7 @@ import com.matera.restserver.util.Messages;
 
 public class EntityNotFoundException extends Exception {
 
+	private static final String DEFAULT_MESSAGE = "exceptions.default.entitynotfoundexception";
 	/**
 	 * 
 	 */
@@ -14,7 +15,7 @@ public class EntityNotFoundException extends Exception {
 	}
 
 	public EntityNotFoundException() {
-		super(Messages.getMessage("exceptions.default.entitynotfoundexception"));
+		super(Messages.getMessage(DEFAULT_MESSAGE));
 	}
 
 }

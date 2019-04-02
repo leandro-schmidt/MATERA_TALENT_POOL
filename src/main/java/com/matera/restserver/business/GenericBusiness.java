@@ -8,16 +8,16 @@ import com.matera.restserver.exception.EntityNotFoundException;
 
 public interface GenericBusiness<T extends GenericDTO> {
 
-	public Long create(T dto) throws EntityExistsException;
+	Long create(T dto) throws EntityExistsException;
 
-	public void create(List<T> dto);
+	void create(List<T> dto);
 	
-	public T find(Long id) throws EntityNotFoundException;
+	T find(Long id) throws EntityNotFoundException;
 
-	public List<T> findAll() throws EntityNotFoundException;
+	List<T> findAll() throws EntityNotFoundException;
 
-	public T delete(Long id) throws EntityNotFoundException;
+	T delete(Long id) throws EntityNotFoundException;
 
-	public void update(T dto) throws EntityNotFoundException;
+	void update(T dto) throws EntityNotFoundException;
 
 }

@@ -31,12 +31,12 @@ public class EmployeeController {
 	private static final String BAD_PARSING = "Something went wrong while parsing the body of the request :(";
 
 	@Autowired
-	EmployeeService service;
+	private EmployeeService service;
 
 	@Autowired
-	protected ObjectMapper mapper;
+	private ObjectMapper mapper;
 
-	EmployeeDTO employee;
+	private EmployeeDTO employee;
 
 	/**
 	 * Creates an employee.
