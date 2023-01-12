@@ -48,7 +48,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
-			FilterChain filterChain, Authentication auth) throws IOException, ServletException {
+			FilterChain filterChain, Authentication auth) {
 
 		TokenAuthenticationService.addAuthentication(response, auth.getName());
 	}

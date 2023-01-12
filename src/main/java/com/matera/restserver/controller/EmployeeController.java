@@ -38,13 +38,6 @@ public class EmployeeController {
 
 	private EmployeeDTO employee;
 
-	/**
-	 * Creates an employee.
-	 * 
-	 * @param reqBody A JSON that represents the employee being created, which will
-	 *                come in the request body.
-	 * @return the employee created
-	 */
 	@PostMapping(produces = "application/json", consumes = "application/json")
 	public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody String reqBody, UriComponentsBuilder uri) {
 		try {
@@ -64,11 +57,6 @@ public class EmployeeController {
 		return ResponseEntity.created(uriComponents.toUri()).body(employee);
 	}
 
-	/**
-	 * Searchs all active employees.
-	 * 
-	 * @return All employees on the database.
-	 */
 	@GetMapping(produces = "application/json")
 	public List<EmployeeDTO> findAllEmployees() {
 		try {
@@ -78,12 +66,6 @@ public class EmployeeController {
 		}
 	}
 
-	/**
-	 * Searchs for an active employee with given id.
-	 * 
-	 * @param id id of the employee.
-	 * @return employee with given id, if it exists.
-	 */
 	@GetMapping(value = "/{id}", produces = "application/json")
 	public EmployeeDTO findEmployee(@PathVariable Long id) {
 		try {
@@ -93,12 +75,6 @@ public class EmployeeController {
 		}
 	}
 
-	/**
-	 * Deletes (deactivates) an employee with given id.
-	 * 
-	 * @param id
-	 * @return the employee deactivated
-	 */
 	@DeleteMapping(value = "/{id}", produces = "application/json")
 	public EmployeeDTO deleteEmployee(@PathVariable Long id) {
 		try {
@@ -109,13 +85,7 @@ public class EmployeeController {
 		}
 
 	}
-
-	/**
-	 * Updates an employee with given id.
-	 * 
-	 * @param id
-	 * @return the employee updated
-	 */
+	
 	@PutMapping(value = "/{id}", produces = "application/json", consumes = "application/json")
 	public EmployeeDTO updateEmployee(@PathVariable Long id, @RequestBody String reqBody) {
 		try {

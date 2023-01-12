@@ -13,18 +13,6 @@ import com.matera.restserver.exception.EntityNotFoundException;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-	/*
-	 * Created a service and a business layer separated because sometimes, a given
-	 * service may have to deal with the business logic of more than one entity.
-	 * Another possibility would be create just the service layer and handle all the
-	 * business here, and if some service in the future needs to deal with more
-	 * entities, create a Facade object that deal with both respective services.
-	 * BUT, doing it the way I did, I think it's better because it's already more
-	 * explicit that there may be 'entity business logic' and 'interaction of
-	 * entities business logic'; the first case must be done in the business layer,
-	 * and the second here. Plus here we 'manage' the transaction, and business
-	 * layer don't deal with it.
-	 */
 
 	@Autowired
 	EmployeeBusiness business;

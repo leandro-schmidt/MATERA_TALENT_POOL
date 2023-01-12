@@ -14,7 +14,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 public class TokenAuthenticationService {
 
-	// SonarLint made me do it :)
 	private TokenAuthenticationService() {
 
 	}

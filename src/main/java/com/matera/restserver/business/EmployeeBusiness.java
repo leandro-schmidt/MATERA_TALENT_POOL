@@ -25,24 +25,12 @@ public class EmployeeBusiness implements GenericBusiness<EmployeeDTO> {
 	@Autowired
 	private EmployeeRepository rep;
 
-	/**
-	 * The JPA Employee entity
-	 */
 	private Employee entity;
 
-	/**
-	 * The Employee DTO 
-	 */
 	private EmployeeDTO dto;
 
-	/**
-	 * List of JPA Employee entity
-	 */
 	private List<Employee> entities;
-	
-	/**
-	 * Creates an Employee
-	 */
+
 	public Long create(EmployeeDTO dto) throws EntityExistsException {
 		/**
 		 * If you are trying to be sneaky (or you made a mistake, who knows?) and try to
@@ -59,10 +47,7 @@ public class EmployeeBusiness implements GenericBusiness<EmployeeDTO> {
 			throw new EntityExistsException();
 		}
 	}
-	
-	/**
-	 * Finds an Employee with given id
-	 */
+
 	public EmployeeDTO find(Long id) throws EntityNotFoundException {
 		dto = new EmployeeDTO();
 		entities = rep.findByIdAndStatus(id, ACTIVE);
@@ -76,18 +61,10 @@ public class EmployeeBusiness implements GenericBusiness<EmployeeDTO> {
 		return dto;
 	}
 
-	/**
-	 * Finds all Employees
-	 */
 	public List<EmployeeDTO> findAll() throws EntityNotFoundException {
 		List<EmployeeDTO> dtos;
 		entities = rep.findByStatus(ACTIVE);
 
-		/*
-		 * Using a stream to create all the DTOs based on the entities Java 8 rocks \,,/
-		 * :)
-		 * 
-		 */
 		dtos = entities.stream().map(e -> {
 			EmployeeDTO d = new EmployeeDTO();
 			BeanUtils.copyProperties(e, d);
@@ -101,9 +78,6 @@ public class EmployeeBusiness implements GenericBusiness<EmployeeDTO> {
 		return dtos;
 	}
 
-	/**
-	 * Deletes an Employee
-	 */
 	public EmployeeDTO delete(Long id) throws EntityNotFoundException {
 		entities = rep.findByIdAndStatus(id, ACTIVE);
 		dto = new EmployeeDTO();
@@ -120,9 +94,6 @@ public class EmployeeBusiness implements GenericBusiness<EmployeeDTO> {
 
 	}
 
-	/**
-	 * Updates an Employee
-	 */
 	public void update(EmployeeDTO dto) throws EntityNotFoundException {
 		entities = rep.findByIdAndStatus(dto.getId(), ACTIVE);
 
@@ -135,10 +106,7 @@ public class EmployeeBusiness implements GenericBusiness<EmployeeDTO> {
 		rep.save(entity);
 	}
 
-	
-	/**
-	 * Creates a bunch of Employees
-	 */
+
 	public void create(List<EmployeeDTO> dto) {
 		
 		entities = dto.stream().map(e -> {
