@@ -1,4 +1,4 @@
-package com.matera.restserver.business
+package com.matera.restserver.service
 
 import com.matera.restserver.dto.EmployeeDTO
 import com.matera.restserver.exception.EntityExistsException
@@ -6,42 +6,40 @@ import com.matera.restserver.exception.EntityNotFoundException
 import com.matera.restserver.model.Employee
 import com.matera.restserver.repository.EmployeeRepository
 import com.matera.restserver.util.Messages
-import org.springframework.beans.BeanUtils
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.util.stream.Collectors
 
-@Component
-class EmployeeBusiness(private val rep: EmployeeRepository) {
+@Service
+open class EmployeeService(private val employeeRepository: EmployeeRepository) {
     private var entity: Employee? = null
     private var dto: EmployeeDTO? = null
     private var entities: List<Employee>? = null
 
-    fun create(dto: EmployeeDTO): Long? {
+    fun create(dto: EmployeeDTO): Long {
         /**
          * If you are trying to be sneaky (or you made a mistake, who knows?) and try to
          * run an update instead of an insert (even with the documentation saying that
          * you must not inform an id for this operation)
          */
-        return if (rep.findByIdAndStatus(dto.id, ACTIVE).isEmpty()) {
+        return if (employeeRepository.findByIdAndStatus(dto.id, ACTIVE).isEmpty()) {
             entity = Employee(
-                id = null,
                 firstName = dto.firstName,
                 middleName = dto.middleName,
                 lastName = dto.lastName,
-                status = dto.status,
+                status = ACTIVE,
                 dateOfBirth = dto.dateOfBirth,
                 dateOfEmployment = dto.dateOfEmployment
             )
-            entity!!.status = ACTIVE
-            rep.save(entity)
+            employeeRepository.save(entity)
             entity!!.id
         } else {
             throw EntityExistsException()
         }
     }
 
-    fun find(id: Long?): EmployeeDTO {
-        entities = rep.findByIdAndStatus(id, ACTIVE)
+    fun find(id: Long): EmployeeDTO {
+        entities = employeeRepository.findByIdAndStatus(id, ACTIVE)
         if (entities!!.isEmpty()) {
             throw EntityNotFoundException()
         }
@@ -58,8 +56,8 @@ class EmployeeBusiness(private val rep: EmployeeRepository) {
         return dto!!
     }
 
-    fun findAll(): List<EmployeeDTO>? {
-        entities = rep.findByStatus(ACTIVE)
+    fun findAll(): List<EmployeeDTO> {
+        entities = employeeRepository.findByStatus(ACTIVE)
         val dtos: List<EmployeeDTO> = entities!!.stream().map { e: Employee? ->
             val d = EmployeeDTO(
                 id = e!!.id,
@@ -78,14 +76,14 @@ class EmployeeBusiness(private val rep: EmployeeRepository) {
         return dtos
     }
 
-    fun delete(id: Long?): EmployeeDTO {
-        entities = rep.findByIdAndStatus(id, ACTIVE)
+    fun delete(id: Long): EmployeeDTO {
+        entities = employeeRepository.findByIdAndStatus(id, ACTIVE)
         if (entities!!.isEmpty()) {
             throw EntityNotFoundException()
         }
         entity = entities!![0]
         entity!!.status = INACTIVE
-        rep.save(entity)
+        employeeRepository.save(entity)
         dto  = EmployeeDTO(
             id = entity!!.id,
             firstName = entity!!.firstName,
@@ -99,7 +97,7 @@ class EmployeeBusiness(private val rep: EmployeeRepository) {
     }
 
     fun update(dto: EmployeeDTO) {
-        entities = rep.findByIdAndStatus(dto.id, ACTIVE)
+        entities = employeeRepository.findByIdAndStatus(dto.id, ACTIVE)
         if (entities!!.isEmpty()) {
             throw EntityNotFoundException()
         }
@@ -113,7 +111,7 @@ class EmployeeBusiness(private val rep: EmployeeRepository) {
             dateOfBirth = dto.dateOfBirth,
             dateOfEmployment = dto.dateOfEmployment
         )
-        rep.save(entity)
+        employeeRepository.save(entity)
     }
 
     fun create(dto: List<EmployeeDTO>?) {
@@ -129,7 +127,7 @@ class EmployeeBusiness(private val rep: EmployeeRepository) {
             )
             d
         }.collect(Collectors.toList())
-        rep.saveAll(entities)
+        employeeRepository.saveAll(entities)
     }
 
     companion object {
