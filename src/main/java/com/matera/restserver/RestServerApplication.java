@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -16,7 +17,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.matera.restserver.service.EmployeeService;
 import com.matera.restserver.util.Messages;
 import com.matera.restserver.dto.EmployeeDTO;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+@ComponentScan("com.matera.restserver" )
+@EnableJpaRepositories("com.matera.restserver.repository")
+@EntityScan("com.matera.restserver.model")
 @SpringBootApplication
 public class RestServerApplication {
 

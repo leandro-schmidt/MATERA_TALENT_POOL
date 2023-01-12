@@ -22,7 +22,6 @@ public class EmployeeBusiness implements GenericBusiness<EmployeeDTO> {
 
 	private static final String ACTIVE = "ACTIVE";
 
-	@Autowired
 	private EmployeeRepository rep;
 
 	private Employee entity;
@@ -30,6 +29,10 @@ public class EmployeeBusiness implements GenericBusiness<EmployeeDTO> {
 	private EmployeeDTO dto;
 
 	private List<Employee> entities;
+
+	public EmployeeBusiness(EmployeeRepository rep) {
+		this.rep = rep;
+	}
 
 	public Long create(EmployeeDTO dto) throws EntityExistsException {
 		/**

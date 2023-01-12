@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driver-class-name: org.hsqldb.jdbcDriver
+    username: sa
+    password:
+    url: jdbc:hsqldb:mem://productDb
