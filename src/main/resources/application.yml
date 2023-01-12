@@ -1,6 +1,6 @@
 spring:
   datasource:
-    driver-class-name: org.hsqldb.jdbcDriver
-    username: sa
-    password:
-    url: jdbc:hsqldb:mem://productDb
+    driver-class-name: ${DATASOURCE_DRIVER:org.hsqldb.jdbcDriver}
+    username: ${DATASOURCE_USER:sa}
+    password: ${DATASOURCE_PWD:}
+    url: ${DATASOURCE_URL:jdbc:hsqldb:mem://productDb}
