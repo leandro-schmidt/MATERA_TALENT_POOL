@@ -3,6 +3,9 @@ plugins {
     `java-library`
     `maven-publish`
     kotlin("jvm") version "1.8.0"
+    id("org.jlleitschuh.gradle.ktlint") version "9.4.1"
+    id("io.gitlab.arturbosch.detekt") version "1.16.0-RC1"
+    jacoco
 }
 
 repositories {
@@ -10,6 +13,7 @@ repositories {
     maven {
         url = uri("https://repo.maven.apache.org/maven2/")
     }
+    mavenCentral()
 }
 
 dependencies {
@@ -23,7 +27,8 @@ dependencies {
     implementation("org.hibernate:hibernate-entitymanager:5.6.14.Final")
     implementation("org.hsqldb:hsqldb:2.7.1")
     implementation("io.jsonwebtoken:jjwt:0.9.1")
-
+    testImplementation("org.junit.vintage:junit-vintage-engine:5.8.2")
+    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
 }
 
 group = "com.matera.restserver"
@@ -37,10 +42,62 @@ publishing {
     }
 }
 
-tasks.withType<JavaCompile>() {
+tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
 }
 
-tasks.withType<Javadoc>() {
+tasks.withType<Javadoc> {
     options.encoding = "UTF-8"
+}
+
+ktlint {
+    version.set("0.40.0")
+    verbose.set(true)
+    outputToConsole.set(true)
+    coloredOutput.set(true)
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.JSON)
+    }
+}
+
+detekt {
+    input = objects.fileCollection().from("src/main/kotlin", "src/test/kotlin")
+    config = objects.fileCollection().from("detekt-config.yaml")
+    reports {
+        html {
+            enabled = true
+            destination = file("${rootProject.rootDir}/${rootProject.name}/detektHtmlReport/detekt.html")
+        }
+    }
+}
+
+jacoco {
+    toolVersion = "0.8.8"
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+    reports.xml.required.set(false)
+    reports.csv.required.set(false)
+    reports.html.outputLocation.set(file("${rootProject.rootDir}/${rootProject.name}/jacocoHtmlReport"))
+}
+
+tasks.jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                counter = "LINE"
+                value = "COVEREDRATIO"
+                minimum = "0.90".toBigDecimal()
+            }
+        }
+    }
+}
+
+tasks.check {
+    dependsOn("jacocoTestCoverageVerification")
 }

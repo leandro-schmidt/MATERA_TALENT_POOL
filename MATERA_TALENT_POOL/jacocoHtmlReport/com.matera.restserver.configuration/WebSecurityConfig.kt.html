@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WebSecurityConfig.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MATERA_TALENT_POOL</a> &gt; <a href="index.source.html" class="el_package">com.matera.restserver.configuration</a> &gt; <span class="el_source">WebSecurityConfig.kt</span></div><h1>WebSecurityConfig.kt</h1><pre class="source lang-java linenums">package com.matera.restserver.configuration
+
+import com.matera.restserver.security.JWTAuthenticationFilter
+import com.matera.restserver.security.JWTLoginFilter
+import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
+import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+
+@Configuration
+@EnableWebSecurity
+<span class="nc" id="L15">open class WebSecurityConfig : WebSecurityConfigurerAdapter() {</span>
+    @Throws(Exception::class)
+    override fun configure(httpSecurity: HttpSecurity) {
+<span class="nc" id="L18">        httpSecurity.csrf().disable().authorizeRequests().antMatchers(HttpMethod.POST, &quot;/login&quot;).permitAll()</span>
+<span class="nc" id="L19">            .anyRequest().authenticated().and()</span>
+<span class="nc" id="L20">            .addFilterBefore(</span>
+<span class="nc" id="L21">                JWTLoginFilter(&quot;/login&quot;, authenticationManager()),</span>
+                UsernamePasswordAuthenticationFilter::class.java
+            )
+<span class="nc" id="L24">            .addFilterBefore(JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter::class.java)</span>
+<span class="nc" id="L25">    }</span>
+
+    @Throws(Exception::class)
+    override fun configure(auth: AuthenticationManagerBuilder) {
+<span class="nc" id="L29">        auth.inMemoryAuthentication()</span>
+            /**
+             * The '{noop}' will tell spring to use NoOpPasswordEncoder, which is
+             * deprecated. Since the idea is to keep things simple, I think it's ok to use
+             * it here. Doesn't mean I would use it in a 'real' application, though; I think
+             * the idea here is exercise the use of the client token authentication
+             * solution, this is just a detail :)
+             */
+<span class="nc" id="L37">            .withUser(&quot;admin&quot;).password(&quot;{noop}password&quot;).roles(&quot;ADMIN&quot;)</span>
+<span class="nc" id="L38">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
