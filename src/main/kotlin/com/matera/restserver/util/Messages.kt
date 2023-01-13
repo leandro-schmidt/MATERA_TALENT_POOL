@@ -1,18 +1,21 @@
 package com.matera.restserver.util
 
+import org.slf4j.LoggerFactory
 import java.text.MessageFormat
 import java.util.*
-import java.util.logging.Logger
 
+@Suppress
 object Messages {
     private var bundle: ResourceBundle? = null
-    private val LOGGER = Logger.getLogger(Messages::class.java.name)
+    private val logger = LoggerFactory.getLogger(Messages::class.java)
 
     init {
         try {
             bundle = ResourceBundle.getBundle("messages")
-        } catch (e: Exception) {
-            LOGGER.severe(e.message)
+        } catch (e: java.lang.NullPointerException) {
+            logger.error(e.message)
+        } catch (e1: MissingResourceException) {
+            logger.error(e1.message)
         }
     }
 
@@ -27,7 +30,7 @@ object Messages {
                 return bundle!!.getString(key)
             }
         } catch (e: MissingResourceException) {
-            LOGGER.severe(e.message)
+            logger.error(e.message)
         }
         return null
     }
@@ -44,7 +47,7 @@ object Messages {
                 return MessageFormat.format(bundle!!.getString(key), arg)
             }
         } catch (e: MissingResourceException) {
-            LOGGER.severe(e.message)
+            logger.error(e.message)
         }
         return null
     }
@@ -58,10 +61,10 @@ object Messages {
     fun getMessage(key: String?, args: Array<Any?>): String? {
         try {
             if (bundle != null) {
-                return MessageFormat.format(bundle!!.getString(key), *args)
+                return MessageFormat.format(bundle!!.getString(key), args.toString())
             }
         } catch (e: MissingResourceException) {
-            LOGGER.severe(e.message)
+            logger.error(e.message)
         }
         return null
     }

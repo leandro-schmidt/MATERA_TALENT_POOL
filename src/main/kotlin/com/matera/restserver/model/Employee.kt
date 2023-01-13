@@ -5,11 +5,13 @@ import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
 
+private const val INVALID_ID = -999L
+
 @Entity
 data class Employee(
     @Id
     @GeneratedValue
-    var id: Long = -999,
+    var id: Long = INVALID_ID,
     var firstName: String = "",
     var middleName: String = "",
     var lastName: String = "",

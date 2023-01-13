@@ -7,7 +7,6 @@ import com.matera.restserver.model.Employee
 import com.matera.restserver.repository.EmployeeRepository
 import com.matera.restserver.util.Messages
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 import java.util.stream.Collectors
 
 @Service
@@ -67,7 +66,7 @@ open class EmployeeService(private val employeeRepository: EmployeeRepository) {
                 status = e.status,
                 dateOfBirth = e.dateOfBirth,
                 dateOfEmployment = e.dateOfEmployment
-                )
+            )
             d
         }.collect(Collectors.toList())
         if (dtos.isEmpty()) {
@@ -84,7 +83,7 @@ open class EmployeeService(private val employeeRepository: EmployeeRepository) {
         entity = entities!![0]
         entity!!.status = INACTIVE
         employeeRepository.save(entity)
-        dto  = EmployeeDTO(
+        dto = EmployeeDTO(
             id = entity!!.id,
             firstName = entity!!.firstName,
             middleName = entity!!.middleName,

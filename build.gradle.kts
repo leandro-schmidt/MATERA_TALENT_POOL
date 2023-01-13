@@ -3,8 +3,8 @@ plugins {
     `java-library`
     `maven-publish`
     kotlin("jvm") version "1.8.0"
-    id("org.jlleitschuh.gradle.ktlint") version "9.4.1"
-    id("io.gitlab.arturbosch.detekt") version "1.16.0-RC1"
+    id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
+    id("io.gitlab.arturbosch.detekt") version "1.21.0"
     jacoco
 }
 
@@ -29,6 +29,7 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt:0.9.1")
     testImplementation("org.junit.vintage:junit-vintage-engine:5.8.2")
     testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 group = "com.matera.restserver"
@@ -57,17 +58,6 @@ ktlint {
     coloredOutput.set(true)
     reporters {
         reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.JSON)
-    }
-}
-
-detekt {
-    input = objects.fileCollection().from("src/main/kotlin", "src/test/kotlin")
-    config = objects.fileCollection().from("detekt-config.yaml")
-    reports {
-        html {
-            enabled = true
-            destination = file("${rootProject.rootDir}/${rootProject.name}/detektHtmlReport/detekt.html")
-        }
     }
 }
 

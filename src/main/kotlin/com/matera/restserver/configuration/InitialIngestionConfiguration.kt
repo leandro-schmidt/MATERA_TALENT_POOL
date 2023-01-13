@@ -1,8 +1,5 @@
 package com.matera.restserver.configuration
 
-import org.springframework.context.annotation.Configuration
-
-
 open class InitialIngestionConfiguration {
 
 //    @Bean

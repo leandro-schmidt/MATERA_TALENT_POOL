@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 object TokenAuthenticationService {
-    const val EXPIRATION_TIME: Long = 86000000
+    private const val EXPIRATION_TIME: Long = 86000000
 
     // Really secret :X
-    const val SECRET = "MySuperDuperSecretSecret"
-    const val TOKEN_PREFIX = "Bearer"
-    const val HEADER_STRING = "Authorization"
+    private const val SECRET = "MySuperDuperSecretSecret"
+    private const val TOKEN_PREFIX = "Bearer"
+    private const val HEADER_STRING = "Authorization"
     fun addAuthentication(response: HttpServletResponse, username: String?) {
         val jwt = Jwts.builder().setSubject(username) // Can't use LocalDate =(
             .setExpiration(Date(System.currentTimeMillis() + EXPIRATION_TIME))

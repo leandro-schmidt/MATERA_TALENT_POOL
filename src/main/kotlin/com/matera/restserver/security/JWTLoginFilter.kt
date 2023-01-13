@@ -1,6 +1,7 @@
 package com.matera.restserver.security
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import org.slf4j.LoggerFactory
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
@@ -18,6 +19,8 @@ class JWTLoginFilter(url: String?, authManager: AuthenticationManager?) :
         authenticationManager = authManager
     }
 
+    private val logger = LoggerFactory.getLogger(JWTLoginFilter::class.java)
+
     @Throws(ServletException::class)
     override fun attemptAuthentication(request: HttpServletRequest, response: HttpServletResponse): Authentication {
         val credentials: AccountCredentials = try {
@@ -30,19 +33,24 @@ class JWTLoginFilter(url: String?, authManager: AuthenticationManager?) :
              * user informed an invalid user/password. This will trigger a 403 response,
              * which is not the right response :(
              */
+            logger.error(e.message)
             return authenticationManager
                 .authenticate(UsernamePasswordAuthenticationToken(null, null, emptyList()))
         }
         return authenticationManager.authenticate(
             UsernamePasswordAuthenticationToken(
-                credentials.username, credentials.password, emptyList()
+                credentials.username,
+                credentials.password,
+                emptyList()
             )
         )
     }
 
     override fun successfulAuthentication(
-        request: HttpServletRequest, response: HttpServletResponse,
-        filterChain: FilterChain, auth: Authentication
+        request: HttpServletRequest,
+        response: HttpServletResponse,
+        filterChain: FilterChain,
+        auth: Authentication
     ) {
         TokenAuthenticationService.addAuthentication(response, auth.name)
     }
