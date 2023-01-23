@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface EmployeeRepository : JpaRepository<Employee, Long> {
-    fun findByIdAndStatus(id: Long, status: String): List<Employee>
+    fun findByIdAndStatus(id: Long, status: String): Employee?
     fun findByStatus(status: String): List<Employee>
 }
