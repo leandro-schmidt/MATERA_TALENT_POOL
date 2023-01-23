@@ -2,39 +2,39 @@
   "firstName" : "Leandro" ,
   "middleName" : "Costa" ,
   "lastName" : "Schmidt" ,
-  "dateOfBirth" : "1992-07-18" ,
-  "dateOfEmployment" : "2017-12-12",
+  "dateOfBirth" : "1992-07-18T00:00Z" ,
+  "dateOfEmployment" : "2017-12-12T00:00Z",
   "status" : "ACTIVE"
 },
 {
   "firstName" : "Arnold" ,
   "middleName" : "" ,
   "lastName" : "Schwarzenegger" ,
-  "dateOfBirth" : "1947-07-30" ,
-  "dateOfEmployment" : "1990-12-09",
+  "dateOfBirth" : "1947-07-30T00:00Z" ,
+  "dateOfEmployment" : "1990-12-09T00:00Z",
   "status" : "ACTIVE"
 },
 {
   "firstName" : "David" ,
   "middleName" : "Something" ,
   "lastName" : "Other Stuff" ,
-  "dateOfBirth" : "1978-08-20" ,
-  "dateOfEmployment" : "2000-09-12",
+  "dateOfBirth" : "1978-08-20T00:00Z" ,
+  "dateOfEmployment" : "2000-09-12T00:00Z",
   "status" : "ACTIVE"
 },
 {
   "firstName" : "Bird" ,
   "middleName" : "" ,
   "lastName" : "Person" ,
-  "dateOfBirth" : "1000-07-15" ,
-  "dateOfEmployment" : "2017-12-25",
+  "dateOfBirth" : "1000-07-15T00:00Z" ,
+  "dateOfEmployment" : "2017-12-25T00:00Z",
   "status" : "ACTIVE"
 },
 {
   "firstName" : "Bojack" ,
   "middleName" : "" ,
   "lastName" : "Horseman" ,
-  "dateOfBirth" : "1964-01-02" ,
-  "dateOfEmployment" : "2017-12-12",
+  "dateOfBirth" : "1964-01-02T00:00Z" ,
+  "dateOfEmployment" : "2017-12-12T00:00Z",
   "status" : "ACTIVE"
 }]

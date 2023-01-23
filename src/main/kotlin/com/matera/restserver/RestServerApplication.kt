@@ -13,6 +13,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 @ConfigurationPropertiesScan
 @SpringBootApplication
 open class RestServerApplication
-    fun main(args: Array<String>) {
-        runApplication<RestServerApplication>(*args)
-    }
+fun main(args: Array<String>) {
+    runApplication<RestServerApplication>(args.toString())
+}

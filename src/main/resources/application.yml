@@ -4,3 +4,6 @@ spring:
     username: ${DATASOURCE_USER:sa}
     password: ${DATASOURCE_PWD:}
     url: ${DATASOURCE_URL:jdbc:hsqldb:mem://productDb}
+
+server:
+  port: 8089
