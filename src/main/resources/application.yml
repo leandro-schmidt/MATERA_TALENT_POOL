@@ -4,3 +4,12 @@ spring:
     username: ${DATASOURCE_USER:sa}
     password: ${DATASOURCE_PWD:}
     url: ${DATASOURCE_URL:jdbc:hsqldb:mem://productDb}
+
+server:
+  port: 8089
+
+keycloak:
+  realm: master
+  auth-server-url: ${KEYCLOAK_HOST:localhost}:${KEYCLOAK_PORT:8080}/auth
+  resource: employee-app
+  bearer-only: true
