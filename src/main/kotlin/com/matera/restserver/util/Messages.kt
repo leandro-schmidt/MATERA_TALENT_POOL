@@ -1,10 +1,10 @@
 package com.matera.restserver.util
 
 import ch.qos.logback.core.CoreConstants.EMPTY_STRING
+import lombok.Generated
 import org.slf4j.LoggerFactory
 import java.util.MissingResourceException
 import java.util.ResourceBundle
-import lombok.Generated
 
 @Suppress
 @Generated
