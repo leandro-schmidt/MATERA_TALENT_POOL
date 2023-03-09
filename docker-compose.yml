@@ -1,9 +1,0 @@
-version: "3.9"
-services:
-  keycloak:
-    container_name: keycloak
-    image: "jboss/keycloak:15.0.2"
-    env_file:
-      - ./keycloak.dev.env
-    ports:
-      - "8080:8080"

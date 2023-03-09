@@ -29,6 +29,7 @@ dependencies {
     implementation("org.hibernate:hibernate-core:5.6.14.Final")
     implementation("org.hibernate:hibernate-entitymanager:5.6.14.Final")
     implementation("org.hsqldb:hsqldb:2.7.1")
+    compileOnly("org.projectlombok:lombok:1.18.18")
     testImplementation("org.junit.jupiter:junit-jupiter:5.4.0")
     testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test:2.7.7")
@@ -85,7 +86,7 @@ tasks.jacocoTestCoverageVerification {
             limit {
                 counter = "LINE"
                 value = "COVEREDRATIO"
-                minimum = "0.00".toBigDecimal()
+                minimum = "0.95".toBigDecimal()
             }
         }
     }

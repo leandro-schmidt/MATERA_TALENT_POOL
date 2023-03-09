@@ -1,5 +1,6 @@
 package com.matera.restserver
 
+import lombok.Generated
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.domain.EntityScan
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan
@@ -12,6 +13,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 @EntityScan("com.matera.restserver.model")
 @ConfigurationPropertiesScan
 @SpringBootApplication
+@Generated
 open class RestServerApplication
 fun main(args: Array<String>) {
     runApplication<RestServerApplication>(args.toString())

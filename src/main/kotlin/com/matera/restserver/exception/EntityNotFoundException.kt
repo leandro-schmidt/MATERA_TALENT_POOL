@@ -1,7 +1,9 @@
 package com.matera.restserver.exception
 
 import com.matera.restserver.util.Messages.getMessage
+import lombok.Generated
 
+@Generated
 class EntityNotFoundException : Exception {
     constructor(msg: String?) : super(msg)
     constructor() : super(getMessage(DEFAULT_MESSAGE))

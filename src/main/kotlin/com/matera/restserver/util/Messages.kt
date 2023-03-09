@@ -1,11 +1,13 @@
 package com.matera.restserver.util
 
+import ch.qos.logback.core.CoreConstants.EMPTY_STRING
 import org.slf4j.LoggerFactory
-import java.text.MessageFormat
 import java.util.MissingResourceException
 import java.util.ResourceBundle
+import lombok.Generated
 
 @Suppress
+@Generated
 object Messages {
     private var bundle: ResourceBundle? = null
     private val logger = LoggerFactory.getLogger(Messages::class.java)
@@ -20,53 +22,11 @@ object Messages {
         }
     }
 
-    /**
-     * Gets the message of the given key
-     * @param key Key of the message.
-     * @return
-     */
-    fun getMessage(key: String?): String? {
+    fun getMessage(key: String): String =
         try {
-            if (bundle != null) {
-                return bundle!!.getString(key)
-            }
+            if (bundle != null) bundle!!.getString(key) else EMPTY_STRING
         } catch (e: MissingResourceException) {
             logger.error(e.message)
+            EMPTY_STRING
         }
-        return null
-    }
-
-    /**
-     * Gets the message of the given key with parameter.
-     * @param key Key of the message.
-     * @param arg The parameter to be on the message.
-     * @return
-     */
-    fun getMessage(key: String?, arg: Any?): String? {
-        try {
-            if (bundle != null) {
-                return MessageFormat.format(bundle!!.getString(key), arg)
-            }
-        } catch (e: MissingResourceException) {
-            logger.error(e.message)
-        }
-        return null
-    }
-
-    /**
-     * Gets the message of the given key with parameters.
-     * @param key Key of the message.
-     * @param args The parameters to be on the message.
-     * @return
-     */
-    fun getMessage(key: String?, args: Array<Any?>): String? {
-        try {
-            if (bundle != null) {
-                return MessageFormat.format(bundle!!.getString(key), args.toString())
-            }
-        } catch (e: MissingResourceException) {
-            logger.error(e.message)
-        }
-        return null
-    }
 }
