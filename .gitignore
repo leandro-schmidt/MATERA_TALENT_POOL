@@ -30,6 +30,7 @@ target
 .gradle
 **/build/
 !src/**/build/
+db-data
 
 # Ignore Gradle GUI config
 gradle-app.setting

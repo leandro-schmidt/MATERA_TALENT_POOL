@@ -1,0 +1,32 @@
+[{
+  "firstName" : "Leandro" ,
+  "middleName" : "Costa" ,
+  "lastName" : "Schmidt" ,
+  "dateOfBirth" : "1992-07-18T00:00Z" ,
+  "dateOfEmployment" : "2017-12-12T00:00Z",
+  "status" : "ACTIVE"
+},
+{
+  "firstName" : "Arnold" ,
+  "middleName" : "" ,
+  "lastName" : "Schwarzenegger" ,
+  "dateOfBirth" : "1947-07-30T00:00Z" ,
+  "dateOfEmployment" : "1990-12-09T00:00Z",
+  "status" : "ACTIVE"
+},
+{
+  "firstName" : "Manuel" ,
+  "middleName" : "Cunha" ,
+  "lastName" : "Fernandez" ,
+  "dateOfBirth" : "1987-08-20T00:00Z" ,
+  "dateOfEmployment" : "2004-09-12T00:00Z",
+  "status" : "ACTIVE"
+},
+{
+  "firstName" : "Bird" ,
+  "middleName" : "" ,
+  "lastName" : "Person" ,
+  "dateOfBirth" : "1000-07-15T00:00Z" ,
+  "dateOfEmployment" : "2017-12-25T00:00Z",
+  "status" : "ACTIVE"
+}]

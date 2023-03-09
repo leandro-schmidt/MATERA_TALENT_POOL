@@ -1,6 +1,4 @@
 spring:
-  profiles:
-    active: production
   datasource:
     driver-class-name: ${DATASOURCE_DRIVER:org.hsqldb.jdbcDriver}
     username: ${DATASOURCE_USER:sa}

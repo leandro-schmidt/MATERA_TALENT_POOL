@@ -1,5 +1,6 @@
 package com.matera.restserver.configuration
 
+import lombok.Generated
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -15,6 +16,7 @@ import java.util.Properties
 import javax.sql.DataSource
 
 @Configuration
+@Generated
 @EnableTransactionManagement
 open class JpaConfiguration {
     @Value("\${spring.datasource.driver-class-name}")

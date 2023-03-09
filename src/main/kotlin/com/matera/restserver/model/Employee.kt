@@ -1,17 +1,14 @@
 package com.matera.restserver.model
 
 import java.time.LocalDateTime
+import java.util.UUID
 import javax.persistence.Entity
-import javax.persistence.GeneratedValue
 import javax.persistence.Id
-
-private const val ZERO = 0L
 
 @Entity
 data class Employee(
     @Id
-    @GeneratedValue
-    var id: Long = ZERO,
+    var id: UUID = UUID.randomUUID(),
     val firstName: String = "",
     val middleName: String = "",
     val lastName: String = "",

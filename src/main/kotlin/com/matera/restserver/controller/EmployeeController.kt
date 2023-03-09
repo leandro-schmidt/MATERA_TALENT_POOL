@@ -1,7 +1,6 @@
 package com.matera.restserver.controller
 
 import com.matera.restserver.dto.CreateEmployeeDTO
-import com.matera.restserver.exception.EntityExistsException
 import com.matera.restserver.exception.EntityNotFoundException
 import com.matera.restserver.model.Employee
 import com.matera.restserver.service.EmployeeService
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.server.ResponseStatusException
 import org.springframework.web.util.UriComponentsBuilder
+import java.util.UUID
 
 @RestController
 @RequestMapping("/employee")
@@ -26,54 +26,29 @@ open class EmployeeController(private val employeeService: EmployeeService) {
     fun createEmployee(
         @RequestBody employee: CreateEmployeeDTO,
         uri: UriComponentsBuilder
-    ): ResponseEntity<CreateEmployeeDTO?> {
-        var id: Long
-        try {
-            id = employeeService.create(employee)
-        } catch (e: EntityExistsException) {
-            throw ResponseStatusException(HttpStatus.BAD_REQUEST, e.message, e)
-        }
-
-        // Return the location on the header
-        val uriComponents = uri.path("/employee/{id}").buildAndExpand(id)
-        return ResponseEntity.created(uriComponents.toUri()).body(employee)
-    }
-
-    @GetMapping(produces = ["application/json"])
-    fun findAllEmployees(): List<Employee> {
-        return try {
-            employeeService.findAll()
-        } catch (e: EntityNotFoundException) {
-            throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message, e)
-        }
-    }
-
-    @GetMapping(value = ["/{id}"], produces = ["application/json"])
-    fun findEmployee(@PathVariable id: Long): Employee {
-        return try {
-            employeeService.find(id)
-        } catch (e: EntityNotFoundException) {
-            throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message, e)
-        }
-    }
-
-    @DeleteMapping(value = ["/{id}"], produces = ["application/json"])
-    fun deleteEmployee(@PathVariable id: Long): Employee {
-        return try {
-            employeeService.delete(id)
-        } catch (e: EntityNotFoundException) {
-            throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message, e)
-        }
+    ): ResponseEntity<Employee> {
+        val employeeCreated = employeeService.create(employee)
+        return ResponseEntity.created(
+            uri.path("/employee/{id}")
+                .buildAndExpand(employeeCreated.id).toUri()
+        ).body(employeeCreated)
     }
 
     @PutMapping(value = ["/{id}"], produces = ["application/json"], consumes = ["application/json"])
-    fun updateEmployee(@PathVariable id: Long, @RequestBody employee: Employee): Employee? {
-        employee.id = id
+    fun updateEmployee(@PathVariable id: UUID, @RequestBody employee: Employee): Employee? =
         try {
+            employee.id = id
             employeeService.update(employee)
         } catch (e: EntityNotFoundException) {
             throw ResponseStatusException(HttpStatus.BAD_REQUEST, e.message, e)
         }
-        return employee
-    }
+
+    @GetMapping(produces = ["application/json"])
+    fun findAllEmployees(): List<Employee> = employeeService.findAll()
+
+    @GetMapping(value = ["/{id}"], produces = ["application/json"])
+    fun findEmployee(@PathVariable id: UUID): Employee? = employeeService.find(id)
+
+    @DeleteMapping(value = ["/{id}"], produces = ["application/json"])
+    fun deleteEmployee(@PathVariable id: UUID): Employee? = employeeService.delete(id)
 }
