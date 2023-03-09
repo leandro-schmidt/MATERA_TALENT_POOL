@@ -6,11 +6,11 @@ The project consists into a web application that exposes REST operations for emp
 Here are a few things you need to know about this application.
 
 ### Initial Employee Data
-When the application is started, it will use the json file located [here](https://github.com/leandro-schmidt/MATERA_TALENT_POOL/blob/master/src/main/resources/employees.json) as a initial load of employees to the memory database. 
+When the application is started, it will ingest the json file located [here](https://github.com/leandro-schmidt/MATERA_TALENT_POOL/blob/master/src/main/resources/employees.json) as a initial load of employees to the in memory database. 
 If you want to add more employees, or remove some, change this file and then build the application again.
 
 ## Building and Running
-Since this application uses Spring Boot and Maven, you just need to build it with this command from the root directory:
+Since this application uses Spring Boot and Gradle, you just need to build it with this command from the root directory:
 ```
 gradle build
 ```
